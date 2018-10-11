@@ -35,7 +35,6 @@ class Restaurants extends Component {
             let className = 'restaurants__item';
 
             if (this.state.selected === restaurant) {
-                console.log("selected");
                 className = 'restaurants__item restaurants__item--selected'
             }
 
@@ -67,7 +66,7 @@ class Restaurants extends Component {
                         if (key === null) {
                             this.setState({ selected: null });
                         } else {
-                            console.log(this.state.restaurants);
+
                             var found = _.find(this.state.restaurants, restaurant => restaurant.id === parseInt(key));
 
                             this.setState({ selected: found });

@@ -66,9 +66,6 @@ class Map extends PureComponent {
 
         this.setState({ zoom, center });
 
-        console.log('size', this.props.size);
-        console.log('zoom', this.state.zoom);
-        console.log('center', this.state.center);
     }
 
 
@@ -85,6 +82,7 @@ class Map extends PureComponent {
 
         this.props.onRestaurantSelected(key);
         this.props.onHoverKeyChange(key);
+
     }
 
     _onChildMouseLeave = (/* key, childProps */) => {
@@ -93,12 +91,11 @@ class Map extends PureComponent {
     }
 
     renderMarkers() {
-        console.log("renderMarkers");
         return _.map(this.props.restaurants, restaurant => {
             const { id, name, latitude, longitude } = restaurant;
 
-            if (this.props.selected !== null) {
-                console.log("selected", this.props.selected);
+            if (this.props.selected !== null && this.props.selected !== undefined) {
+
                 return (<Marker
                     key={id}
                     lat={latitude}
@@ -118,6 +115,18 @@ class Map extends PureComponent {
         });
     }
 
+    renderCurrentLocation() {
+        const { latitude, longitude } = this.props.currentLocation;
+
+        return (<div
+            className='current-location'
+            lat={latitude}
+            lng={longitude}
+        />
+        );
+
+    }
+
     render() {
 
         return (
@@ -132,7 +141,9 @@ class Map extends PureComponent {
                 onChildMouseEnter={this._onChildMouseEnter}
                 onChildMouseLeave={this._onChildMouseLeave}
             >
+                {this.renderCurrentLocation()}
                 {this.renderMarkers()}
+
             </GoogleMap>
 
         );
