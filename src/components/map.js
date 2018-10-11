@@ -8,6 +8,7 @@ import GoogleMap from 'google-map-react';
 import { fitBounds } from 'google-map-react/utils';
 
 import Marker from './marker';
+import People from './people';
 import controllable from 'react-controllables';
 
 function createMapOptions(maps) {
@@ -118,14 +119,14 @@ class Map extends PureComponent {
     renderCurrentLocation() {
         const { latitude, longitude } = this.props.currentLocation;
 
-        return (<div
-            className='current-location'
+        return (<People
             lat={latitude}
             lng={longitude}
         />
         );
 
     }
+
 
     render() {
 
@@ -140,6 +141,10 @@ class Map extends PureComponent {
                 onChildClick={this._onChildClick}
                 onChildMouseEnter={this._onChildMouseEnter}
                 onChildMouseLeave={this._onChildMouseLeave}
+                yesIWantToUseGoogleMapApiInternals
+                onGoogleApiLoaded={({ map, maps }) => {
+                    console.log('map', map)
+                }}
             >
                 {this.renderCurrentLocation()}
                 {this.renderMarkers()}

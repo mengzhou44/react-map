@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-export default class Place extends PureComponent {
+export default class Marker extends PureComponent {
 
     render() {
         let className = 'hint hint--html hint--info hint--top marker';
